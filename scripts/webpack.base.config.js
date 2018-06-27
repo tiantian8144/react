@@ -20,14 +20,20 @@ const webpackConfigBase = {
   resolve: {
     extensions: ['.js', '.json'],
     alias: {
-      components: path.join(__dirname, '/../app/components'),
-      actions: path.join(__dirname, '/../app/actions'),
-      api: path.join(__dirname, '/../app/api'),
-      reducers: path.join(__dirname, '/../app/reducers'),
-      utils: path.join(__dirname, '/../app/utils'),
-      controllers: path.join(__dirname, '/../app/controllers'),
-      style: path.join(__dirname, '/../app/style'),
-      images: path.join(__dirname, '/../app/images'),
+      '@app': path.join(__dirname, '../app'),
+      '@actions': path.join(__dirname, '../app/redux/actions'),
+      '@reducers': path.join(__dirname, '../app/redux/reducers'),
+      '@apis': path.join(__dirname, '../app/apis'),
+      '@components': path.join(__dirname, '../app/components'),
+      '@configs': path.join(__dirname, '../app/configs'),
+      '@config': path.join(__dirname, '../app/configs/config.js'),
+      '@ajax': path.join(__dirname, '../app/configs/ajax.js'),
+      '@reg': path.join(__dirname, '../app/configs/regular.config.js'),
+      '@images': path.join(__dirname, '../app/images'),
+      '@middleware': path.join(__dirname, '../app/middleware'),
+      '@pages': path.join(__dirname, '../app/pages'),
+      '@styles': path.join(__dirname, '../app/styles'),
+      '@tableList': path.join(__dirname, '../app/components/tableList/tableList.js'),
     },
   },
   resolveLoader: {
@@ -55,7 +61,15 @@ const webpackConfigBase = {
           fallback: 'style',
           use: [
             { loader: 'css', options: { sourceMap: true } },
-            { loader: 'less', options: { sourceMap: true } }
+            {
+              loader: 'less', options: {
+                sourceMap: true, 
+                paths: [
+                  path.resolve(__dirname, "../node_modules"),
+                  path.resolve(__dirname, "../app/style")
+                ]
+              }
+            }
           ]
         }),
       },
@@ -80,13 +94,9 @@ const webpackConfigBase = {
   plugins: [
     // 提取css
     new ExtractTextPlugin('style.[hash:4].css'),
-    // 将打包后的资源注入到html文件内    
-    new HtmlWebpackPlugin({
-      template: resolve('../app/index.html'),
-    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common', // 入口文件名
-      filename: 'common.bundle.js', // 打包后的文件名
+      filename: 'common.[hash:4].js', // 打包后的文件名
       minChunks: function (module, count) {
         return module.resource &&
           /\.js$/.test(module.resource) &&
