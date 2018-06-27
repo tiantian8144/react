@@ -129,26 +129,26 @@ login(){
 
 
 
-### 图表
+### 登陆
 
-<img src="https://raw.githubusercontent.com/duxianwei520/resource/master/react/screenshots/login.gif" width="973" height="557"/>
+<img src="https://raw.githubusercontent.com/duxianwei520/react/master/react/screenshots/login.gif" width="973" height="557"/>
 
-### Facebook官方富文本编辑器draft.js
+### echart
 
-<img src="https://raw.githubusercontent.com/duxianwei520/resource/master/react/screenshots/echart.gif" width="973" height="557"/>
+<img src="https://raw.githubusercontent.com/duxianwei520/react/master/react/screenshots/echart.gif" width="973" height="557"/>
 
 ### 聊天室
 
-<img src="https://raw.githubusercontent.com/duxianwei520/resource/master/react/screenshots/chat.gif" width="973" height="557"/>
+<img src="https://raw.githubusercontent.com/duxianwei520/react/master/react/screenshots/chat.gif" width="973" height="557"/>
 
 ### 设置中心
 
-<img src="https://raw.githubusercontent.com/duxianwei520/resource/master/react/screenshots/set.gif" width="973" height="557"/>
+<img src="https://raw.githubusercontent.com/duxianwei520/react/master/react/screenshots/set.gif" width="973" height="557"/>
 
 
 ### 构建完成的包的分析截图
 
-<img src="https://raw.githubusercontent.com/duxianwei520/resource/master/react/screenshots/analysis.gif" width="973" height="557"/>
+<img src="https://raw.githubusercontent.com/duxianwei520/react/master/react/screenshots/analysis.gif" width="973" height="557"/>
 
 ### 生成的dist文件夹
 
