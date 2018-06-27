@@ -152,7 +152,7 @@ login(){
 
 ### 生成的dist文件夹
 
-<img src="https://raw.githubusercontent.com/duxianwei520/resource/master/screenshots/dist.gif" width="973" height="557"/>
+<img src="https://raw.githubusercontent.com/duxianwei520/react/master/screenshots/dist.gif" width="973" height="557"/>
 
 
 ## 项目结构
