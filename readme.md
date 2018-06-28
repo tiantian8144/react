@@ -17,10 +17,11 @@ npm install  (安装依赖包)
 
 npm start (运行本地开发环境)
 
-
-另开启一个命令窗口 启动node的本地json数据代理服务
-
 npm run mock (对，就是传说中的 mockjs http://highsea90.com/t/mock/)
+
+#### 注意
+
+如果不启动mock服务，那么登录不进去内页
 
 想要体验聊天室功能  先开启socket服务 运行命令
 
