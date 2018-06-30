@@ -132,28 +132,28 @@ login(){
 
 ### 登陆
 
-<img src="https://raw.githubusercontent.com/duxianwei520/react/master/screenshots/login.gif" width="973" height="557"/>
+<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/login.gif" width="973" height="557"/>
 
 ### echart
 
-<img src="https://raw.githubusercontent.com/duxianwei520/react/master/screenshots/echart.gif" width="973" height="557"/>
+<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/echart.gif" width="973" height="557"/>
 
 ### 聊天室
 
-<img src="https://raw.githubusercontent.com/duxianwei520/react/master/screenshots/chat.gif" width="973" height="557"/>
+<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/chat.gif" width="973" height="557"/>
 
 ### 设置中心
 
-<img src="https://raw.githubusercontent.com/duxianwei520/react/master/screenshots/set.gif" width="973" height="557"/>
+<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/set.gif" width="973" height="557"/>
 
 
 ### 构建完成的包的分析截图
 
-<img src="https://raw.githubusercontent.com/duxianwei520/react/master/screenshots/analysis.gif" width="973" height="557"/>
+<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/analysis.gif" width="973" height="557"/>
 
 ### 生成的dist文件夹
 
-<img src="https://raw.githubusercontent.com/duxianwei520/react/master/screenshots/dist.gif" width="973" height="557"/>
+<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/dist.gif" width="973" height="557"/>
 
 
 ## 项目结构
