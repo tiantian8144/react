@@ -6,6 +6,8 @@ const webpackConfigBase = require('./webpack.base.config')
 const Copy = require('copy-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+// 构建前删除dist目录
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 function resolve(relatedPath) {
   return path.join(__dirname, relatedPath)
@@ -33,6 +35,11 @@ const webpackConfigProd = {
     new Copy([
       { from: './app/images', to: './images' },
     ]),
+    new CleanWebpackPlugin(['dist'],{
+      root: path.join(__dirname, '../'),
+      verbose:false,
+      // exclude:['img']//不删除img静态资源
+    }),
   ],
 }
 

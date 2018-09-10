@@ -4,6 +4,10 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
+const HappyPack = require('happypack')
+const os = require('os')
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
+
 function resolve(relatedPath) {
   return path.join(__dirname, relatedPath)
 }
@@ -44,34 +48,13 @@ const webpackConfigBase = {
       {
         test: /\.js[x]?$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        // loader: 'babel',
+        //把对.js 的文件处理交给id为happyBabel 的HappyPack 的实例执行
+        loader: 'happypack/loader?id=happyBabel',
       },
       {
-        test: /\.css/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style',
-          use: [
-            { loader: 'css', options: { sourceMap: true } }
-          ]
-        }),
-      },
-      {
-        test: /\.less$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style',
-          use: [
-            { loader: 'css', options: { sourceMap: true } },
-            {
-              loader: 'less', options: {
-                sourceMap: true, 
-                paths: [
-                  path.resolve(__dirname, "../node_modules"),
-                  path.resolve(__dirname, "../app/style")
-                ]
-              }
-            }
-          ]
-        }),
+        test: /\.(css|less)$/,
+        loader: ExtractTextPlugin.extract({fallback: 'style', use: 'happypack/loader?id=happyStyle'}),
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -92,6 +75,28 @@ const webpackConfigBase = {
     ],
   },
   plugins: [
+    new HappyPack({
+      //用id来标识 happypack处理那里类文件
+      id: 'happyBabel',
+      //如何处理  用法和loader 的配置一样
+      loaders: [{
+        loader: 'babel?cacheDirectory=true',
+      }],
+      //代表共享进程池，即多个 HappyPack 实例都使用同一个共享进程池中的子进程去处理任务，以防止资源占用过多。
+      threadPool: happyThreadPool,
+      //允许 HappyPack 输出日志
+      verbose: true,
+    }),
+    new HappyPack({
+      //用id来标识 happypack处理那里类文件
+      id: 'happyStyle',
+      //如何处理  用法和loader 的配置一样
+      loaders: [ 'css-loader?sourceMap=true', 'less-loader?sourceMap=true' ], 
+      //代表共享进程池，即多个 HappyPack 实例都使用同一个共享进程池中的子进程去处理任务，以防止资源占用过多。
+      threadPool: happyThreadPool,
+      //允许 HappyPack 输出日志
+      verbose: true,
+    }),
     // 提取css
     new ExtractTextPlugin('style.[hash:4].css'),
     new webpack.optimize.CommonsChunkPlugin({
