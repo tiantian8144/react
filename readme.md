@@ -1,5 +1,145 @@
 
-## 技术栈
+# Readme for English
+## Technology stack
+
+react@16.0 + redux@3.7.2 + react-router@3.2.0 + webpack@3.10.0 + axios@0.18.0 + less@2.7.1 + antd@3.1.3
+
+
+
+## Project introduce
+
+
+```
+git clone --depth 1 https://github.com/duxianwei520/react.git  
+
+cd react 
+
+npm install 
+
+npm start 
+```
+Open another node service to open the mock interface service,if you don't start the mock interface service, you won't login into the inner page
+```
+npm run mock 
+```
+#### Notice
+
+If you wan to experience the chatroom, you need to start socket service first, so you need to run another node service like this
+```
+npm run chat
+```
+and if you want to publish your app, use the following line of commands
+```
+npm run build 
+
+```
+
+This is the basic structure of the data returned by the server.
+
+```
+{
+  data: {
+    totalCount: 100,
+    currentPage: 1,
+    pageSize: 10,
+    'list': [
+    ],
+  },
+  msg: '',
+  status: 1,
+}
+```
+All asynchronous request returns will be processed by 'ajax.js' in configs folder. If there is no problem with the request, the `status` return value is `1`;
+If the request is wrong, such as a parameter error or other error, the `status` return value is `0`;
+If the status value is `-1`, indicating that the login timed out, then the login will pop up.
+These parameters can be adjusted according to the actual situation, and the error message or successful prompt information is returned in `msg`.
+The current project integrates basic user management, role management, module management and other basic rights management functions. The small partners must start `npm run mock` at the same time to see 
+
+
+
+## Description 
+
+>  development environment: win10  Chrome 63.0.3239.132  nodejs 8.7.0
+
+
+>  If you have any questions, please mention them directly in the Issues. I will answer in the first time, or you find that the problem has a very good solution, welcome PR
+
+### Cancel http request example：
+```
+import axios from 'axios'
+const axiosHandle = axios.CancelToken.source()
+
+login(){
+  this.props.dispatch(fetchLogin(values, (res) => {},(error)=>{},axiosHandle)
+  setTimeout(() => {
+    axiosHandle.cancel('cancel handle')
+  }, 3000)
+}
+
+```
+
+
+## Reatures list
+- [√] The project is loaded by the routing module
+- [√] login
+- [√] logt out
+- [√] welcome page
+- [√] menu 
+- [√] redux demo
+- [√] mockjs to mock interface
+- [√] use flex to adapt page height
+- [√] cors
+- [√] webpack bundle analyzer
+- [√] editor draftjs 
+- [√] chatroom
+
+
+
+## screenshots
+
+
+
+### login
+
+<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/login.gif" width="973" height="557"/>
+
+### echart
+
+<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/echart.gif" width="973" height="557"/>
+
+### chatroom
+
+<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/chat.gif" width="973" height="557"/>
+
+### set center
+
+<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/set.gif" width="973" height="557"/>
+
+
+### webpack bundle analysis
+
+<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/analysis.gif" width="973" height="557"/>
+
+### build dist folder
+
+<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/dist.gif" width="973" height="557"/>
+
+
+## License
+
+[MIT](https://github.com/duxianwei520/react/blob/master/LICENSE)
+
+
+## communication
+If you want to communicate with other friends who use react,you can join the react QQ group I created：598372207~
+
+
+
+---
+# 中文readme
+
+
+## 项目技术栈
 
 react@16.0 + redux@3.7.2 + react-router@3.2.0 + webpack@3.10.0 + axios@0.18.0 + less@2.7.1 + antd@3.1.3
 
@@ -9,24 +149,30 @@ react@16.0 + redux@3.7.2 + react-router@3.2.0 + webpack@3.10.0 + axios@0.18.0 + 
 
 
 ```
-git clone https://github.com/duxianwei520/react.git  
+git clone --depth 1 https://github.com/duxianwei520/react.git  
 
-cd react （进入当前的项目）
+cd react 
 
-npm install  (安装依赖包)
+npm install 
 
-npm start (运行本地开发环境)
-
-npm run mock (对，就是传说中的 mockjs http://highsea90.com/t/mock/)
-
+npm start 
+```
 #### 注意
 
-如果不启动mock服务，那么登录不进去内页
+如果不启动mock服务，那么登录不进去内页，所以务必再开启个node进程启动mockjs服务
+```
+npm run mock 
+```
+
 
 想要体验聊天室功能  先开启socket服务 运行命令
 
+```
 npm run chat
 
+```
+最后的构建命令
+```
 npm run build (打包，部署)
 
 ```
@@ -71,8 +217,6 @@ https://github.com/duxianwei520/node
 
 
 ## 说明
-
->  喜欢的别忘记了可以star一下的噢！ 
 
 >  开发环境 win10  Chrome 63.0.3239.132（正式版本） （32 位） nodejs 8.7.0
 
@@ -125,43 +269,6 @@ login(){
 2、目前来说，不足的地方是在于没有很好的区分dev环境跟pro环境，这个后面弄好了再补充上来；mock数据现在还不是那么的方便，需要自己一个个的添加api的json文件
 
 
-
-## 部分截图
-
-
-
-### 登陆
-
-<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/login.gif" width="973" height="557"/>
-
-### echart
-
-<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/echart.gif" width="973" height="557"/>
-
-### 聊天室
-
-<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/chat.gif" width="973" height="557"/>
-
-### 设置中心
-
-<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/set.gif" width="973" height="557"/>
-
-
-### 构建完成的包的分析截图
-
-<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/analysis.gif" width="973" height="557"/>
-
-### 生成的dist文件夹
-
-<img src="https://github.com/duxianwei520/resource/blob/master/react/screenshots/dist.gif" width="973" height="557"/>
-
-
-## 项目结构
-
-```tree
-
-
-```
 ## License
 
 [MIT](https://github.com/duxianwei520/react/blob/master/LICENSE)

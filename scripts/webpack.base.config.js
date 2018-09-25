@@ -1,7 +1,6 @@
 
 const path = require('path')
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const HappyPack = require('happypack')
@@ -48,16 +47,26 @@ const webpackConfigBase = {
       {
         test: /\.js[x]?$/,
         exclude: /node_modules/,
+        include: [resolve('../app')],
         // loader: 'babel',
         //把对.js 的文件处理交给id为happyBabel 的HappyPack 的实例执行
         loader: 'happypack/loader?id=happyBabel',
       },
       {
         test: /\.(css|less)$/,
+        // exclude: /node_modules/,
+        include: [
+          resolve('../app/styles'),
+          resolve('../app/components'),
+          resolve('../node_modules/antd'),
+          resolve('../node_modules/draft-js'),
+        ],
         loader: ExtractTextPlugin.extract({fallback: 'style', use: 'happypack/loader?id=happyStyle'}),
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        exclude: /node_modules/,
+        include: [resolve('../app/images')],
         loader: 'url',
         options: {
           limit: 8192,

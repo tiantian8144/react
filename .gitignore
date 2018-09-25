@@ -51,6 +51,9 @@ jspm_packages
 #eslint
 .eslintcache
 
+#cashe
+.cache
+
 #app/components/condition1.0
 
 #don't upload node_modules.rar
