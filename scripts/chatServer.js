@@ -14,20 +14,29 @@ server.listen(process.env.PORT || 3333);// publish to heroku
 io.sockets.on('connection', function (socket) {
 // new user login
   socket.on('login', function (nickname) {
+   
+    
     if (users.indexOf(nickname) > -1) {
+      
       socket.emit('nickExisted', nickname, users);
     } else {
         // socket.userIndex = users.length;
       socket.nickname = nickname;
       users.push(nickname);
+      console.log(users);
       socket.emit('loginSuccess', nickname, users);
       io.sockets.emit('system', nickname, users, 'login');
     }
   });
 // user leaves
   socket.on('disconnect', function () {
+    console.log(12323445);
+    
+    console.log(socket.nickname);
     if (socket.nickname != null) {
         // users.splice(socket.userIndex, 1);
+        
+        
       users.splice(users.indexOf(socket.nickname), 1);
       socket.broadcast.emit('system', socket.nickname, users, 'logout');
     }

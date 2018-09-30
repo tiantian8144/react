@@ -4,6 +4,7 @@ import { message } from 'antd'
 import { loginByTicket, staff, nav, login as loginApi, getBtns } from '@apis/common'
 
 export function parseQueryString(url) {
+  //把url参数解析为一个对象
   const obj = {}
   if (url.indexOf('?') !== -1) {
     const str = url.split('?')[1]
@@ -14,7 +15,7 @@ export function parseQueryString(url) {
     })
   }
   return obj
-}
+} 
 
 /* --------------验证ticket并获取用户信息和菜单信息 --------------*/
 const _fetchLoginByTicket = async ticket => new Promise((resolve) => {
@@ -128,6 +129,9 @@ export const getMenuId = (navs, pathname) => {
 
 /* ------------------------- 登陆 -------------------------*/
 export const login = (params, success, failure) => {
+  console.log(123454);
+  
+  
   loginApi(params, (response) => {
     sessionStorage.setItem('token', response.data.token)
     localStorage.setItem('sessionStorage', JSON.stringify(sessionStorage))

@@ -11,7 +11,7 @@ import '@styles/base.less'
 
 import Header from './app/header'
 import LeftNav from './app/leftNav'
-import TabList from './app/tabList'
+// import TabList from './app/tabList'
 
 
 @connect((state, props) => ({}))

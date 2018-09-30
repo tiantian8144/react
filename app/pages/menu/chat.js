@@ -69,7 +69,7 @@ export default class popCheck extends Component {
 
     // 测试是否链接上websocket
     that.socket.on('connect', () => console.log('连接socket服务器成功'))
-
+    
     that.socket.emit('login', sessionStorage.getItem('username'))
 
     // 有新的消息发送

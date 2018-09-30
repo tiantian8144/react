@@ -5,6 +5,7 @@ import { Link, hashHistory } from 'react-router'
 import { Menu, Dropdown, Button, Modal, message, Icon, Row, Col } from 'antd'
 import { brandName } from '@config'
 import { logout } from '@apis/common'
+import * as io from 'socket.io-client'
 
 import EditPassword from './modal/editPassword'
 
@@ -33,7 +34,7 @@ export default class Header extends Component {
   // 登出
   handleLogout() {
     const { config } = this.props
-    const self = this
+    const that = this
     confirm({
       title: '提示',
       content: '确认退出登录吗？',
@@ -41,6 +42,13 @@ export default class Header extends Component {
         logout({}, (result) => {
           // console.log(result)
           if (result.status === 1) {
+            const url = location.hostname
+            that.socket = io.connect(`http://${url}:3333/`)
+            // 测试是否链接上websocket
+            that.socket.on('connect', () => console.log('连接socket服务器成功'))
+            that.socket.emit('disconnect',sessionStorage.getItem('username'))
+
+
             sessionStorage.clear()
             config.staff = {}
             hashHistory.push('/login')
@@ -84,6 +92,8 @@ export default class Header extends Component {
 
   render() {
     const userinfo = JSON.parse(sessionStorage.getItem('userinfo')) || {}
+
+    
     const roles = []
     userinfo && userinfo.roles && userinfo.roles.map((item) => {
       roles.push(item.roleName)
@@ -142,7 +152,7 @@ export default class Header extends Component {
               <ul>
                 <li>
                   <Dropdown overlay={userCenter}>
-                    <a className="ant-dropdown-link"><Icon type="user" />{userinfo.chineseName || userinfo.username}</a>
+                    <a className="ant-dropdown-link"><Icon type="user" />123{userinfo.chineseName || userinfo.username}</a>
                   </Dropdown>
                 </li>
               </ul>

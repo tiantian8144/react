@@ -126,12 +126,15 @@ export const oftenFetchByPost = (api, options) => {
     let success = null
     let failure = null
     let config = null
+    
     for (let i = 1; i < rest.length; i += 1) {
       if (typeof rest[i] === 'function') {
         if (!success) {
           success = rest[i]
+          
         } else {
           failure = rest[i]
+
         }
       }
       if (Object.prototype.toString.call(rest[i]) === '[object Object]') {
@@ -155,6 +158,7 @@ export const oftenFetchByPost = (api, options) => {
     })
       .then(response => response.data)
       .then((response) => {
+        
         switch (response.status) {
           case 1: { success && success(response); break }
           case 0: {
@@ -219,7 +223,11 @@ export const oftenFetchByPost = (api, options) => {
 
 // 创建发起api的启动器
 export const createApi = function (api, options) {
+  //api是api的路径
+  //options 是localhost:1111，服务器端口
+  //解析当前网址参数，转化为对象
   const obj = parseQueryString(window.location.href)
+  
   let url = api
   if (obj.key) {
     url = `${api}?key=${obj.key}`
@@ -227,6 +235,8 @@ export const createApi = function (api, options) {
       url = `${api}?key=${obj.key}&sourceName=${obj.sourceName}`
     }
   }
+  
   return oftenFetchByPost(`${url}`, options)
 }
 
+      

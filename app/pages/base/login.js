@@ -7,8 +7,8 @@ import { regExpConfig } from '@reg'
 import { brandName } from '@config'
 import { clearGformCache2, login } from '@actions/common'
 import { /* login,  */staff, menu } from '@apis/common'
-import Logo from '@components/logo/logo'
-import QueuiAnim from 'rc-queue-anim'
+import Logo from '@components/logo/logo' 
+import QueuiAnim from 'rc-queue-anim'//动画效果 rc-queue-anim
 
 // import '@styles/base.less'
 import '@styles/login.less'
@@ -36,7 +36,10 @@ export default class Login extends Component {
 
   componentWillMount() {
     this.props.dispatch(clearGformCache2({}))
+
+    
   }
+
 
   // region 收缩业务代码功能
 
@@ -46,24 +49,84 @@ export default class Login extends Component {
       message.warning('证书登录功能未开通')
       return
     }
+    //校验并获取一组输入域的值与 Error，若 fieldNames 参数为空，则校验全部组件
+      // ( [fieldNames: string[]],
+      //   [options: object],
+      //   callback(errors, values)
+      // ) => void
     this.props.form.validateFields((err, values) => {
+      //values {username: "xuntian", password: "21233445"}
+      
       if (!err) {
-        const query = this.props.form.getFieldsValue()
+        const query = this.props.form.getFieldsValue()//获取一组输入控件的值，如不传入参数，则获取全部组件的值
+      //query {username: "xuntian", password: "21233445"}
         this.setState({ loading: true })
+        //login(params,success,failure)
         this.props.dispatch(login(values, (res) => {
+          // res
+            //{data: {ticket: "ticket", token: "11111"}
+            // msg: "操作成功"
+            // status: 1}
+            sessionStorage.setItem('username', values.username)
+          
           sessionStorage.setItem('token', res.data.token)
           sessionStorage.setItem('ticket', res.data.ticket)
+          //登录成功之后获取菜单栏内容
           menu({}, (response) => {
+            // response
+            // {data:
+            // list: Array(2)
+            // 0: {id: 10060, resName: "工作台", children: Array(4), resKey: "desk$", resIcon: "home"}
+            // 1: {id: 10062, resName: "设置中心", children: Array(3), resKey: "set$", resIcon: "set"}
+            // length: 2
+            // __proto__: Array(0)
+            // __proto__: Object
+            // msg: "操作成功"
+            // status: 1}
+            
             const nav = response.data.list || []
             if (nav && nav[0]) {
               sessionStorage.setItem('gMenuList', JSON.stringify(nav))
               sessionStorage.setItem('topMenuReskey', nav[0].resKey)
               sessionStorage.setItem('leftNav', JSON.stringify(nav))
 
+              //获取用户信息
               staff({ usercode: query.username }, (resp) => {
                 hashHistory.push('/')
+                
+                // resp
+                // {
+                //   data:
+                //   address: "address"
+                //   chineseName: "管理员"
+                //   defaultDeptCode: "370200000000"
+                //   defaultXzqhCode: "370200"
+                //   deptCode: "370200000000"
+                //   deptLevel: "1"
+                //   deptName: "杭州市"
+                //   duty: "超级管理员"
+                //   email: "abc@abc.com"
+                //   gender: 1
+                //   gxdwdm: "370200000000"
+                //   id: 1
+                //   idcardNo: "000000000000000000"
+                //   password: "121212"
+                //   phoneNo: "15100000005"
+                //   policeCode: "000000"
+                //   remark: "remarl"
+                //   roles: [{…}]
+                //   status: 0
+                //   ticket: ".2XxGlEuidOmAoYIdSo6pQIlGbQSh83U7p4eJsoTO-70"
+                //   type: 0
+                //   username: "admin"
+                //   __proto__: Object
+                //   msg: "操作成功"
+                //   status: 1
+                // }
               }, (r) => {
                 message.warning(r.msg)
+                
+                
                 this.setState({
                   loading: false,
                 })
@@ -89,7 +152,7 @@ export default class Login extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    console.log(this.props.loginResponse)
+    // console.log(this.props.loginResponse)
     return (
       <div className="login-container">
         <div className="extraLink">
